@@ -1,4 +1,6 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
+
+import pid
 
 # static_folder=None: na Vercel, os arquivos de public/ são servidos pela CDN,
 # e a documentação recomenda não usar a pasta estática do Flask.
@@ -13,6 +15,17 @@ def index():
 @app.route("/api/health")
 def health():
     return jsonify(status="ok")
+
+
+@app.route("/api/simular", methods=["POST"])
+def simular():
+    # silent=True: JSON ausente ou malformado vira None, tratado na validação
+    dados = request.get_json(silent=True)
+    try:
+        parametros = pid.validar_parametros(dados)
+    except ValueError as erro:
+        return jsonify(erro=str(erro)), 400
+    return jsonify(pid.simular(**parametros))
 
 
 if __name__ == "__main__":

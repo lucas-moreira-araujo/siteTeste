@@ -7,7 +7,10 @@ HTML, CSS e JavaScript puros, hospedado na Vercel.
 
 ```
 app.py              # Aplicação Flask (rotas da página e da API)
-requirements.txt    # Dependências Python
+pid.py              # Simulação do controle PID (Python puro)
+tests/              # Testes automatizados (pytest)
+requirements.txt    # Dependências de produção (vão para a Vercel)
+requirements-dev.txt # Dependências de desenvolvimento (pytest)
 .python-version     # Versão do Python usada na Vercel
 templates/          # HTML renderizado pelo Flask
 public/             # Arquivos estáticos (CSS, JS, imagens), servidos na raiz do site
@@ -20,18 +23,51 @@ Requer Python 3.13.
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
+pip install -r requirements-dev.txt
 python app.py
 ```
 
 Acesse http://127.0.0.1:5000
 
+Para rodar os testes:
+
+```powershell
+pytest
+```
+
 ## Rotas
 
-| Rota          | Descrição                        |
-|---------------|----------------------------------|
-| `/`           | Página inicial                   |
-| `/api/health` | Verificação de saúde, retorna `{"status": "ok"}` |
+| Rota                 | Descrição                        |
+|----------------------|----------------------------------|
+| `GET /`              | Página inicial                   |
+| `GET /api/health`    | Verificação de saúde, retorna `{"status": "ok"}` |
+| `POST /api/simular`  | Simula o controle PID do nível de um tanque |
+
+### `POST /api/simular`
+
+Corpo (JSON):
+
+| Campo         | Faixa aceita | Descrição                    |
+|---------------|--------------|------------------------------|
+| `kp`          | 0 a 100      | Ganho proporcional           |
+| `ki`          | 0 a 100      | Ganho integral               |
+| `kd`          | 0 a 50       | Ganho derivativo             |
+| `setpoint`    | 1 a 100      | Nível desejado (%)           |
+| `tempo_total` | 1 a 120      | Duração da simulação (s)     |
+
+Resposta: listas `tempo`, `saida` (nível) e `controle` (abertura da válvula),
+mais `metricas` com `overshoot_pct`, `tempo_subida` (10%–90% do setpoint) e
+`tempo_acomodacao` (faixa de 2%). Os tempos valem `null` quando o critério não
+é atingido dentro da simulação. Parâmetros inválidos retornam `400` com
+`{"erro": "mensagem"}`.
+
+Exemplo:
+
+```powershell
+Invoke-RestMethod -Method Post http://127.0.0.1:5000/api/simular `
+  -ContentType "application/json" `
+  -Body '{"kp": 2, "ki": 0.5, "kd": 0, "setpoint": 50, "tempo_total": 60}'
+```
 
 ## Deploy
 
