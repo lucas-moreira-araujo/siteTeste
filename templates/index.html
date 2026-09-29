@@ -7,9 +7,86 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <h1>Olá, mundo</h1>
-    <p>Status da API: <span id="status">verificando...</span></p>
+    <header class="cabecalho">
+        <h1>Lucas Moreira Araujo</h1>
+        <p>Engenharia de Controle e Automação · dados e IA aplicados a processos</p>
+    </header>
 
-    <script src="/js/main.js"></script>
+    <main>
+        <section class="demo" aria-labelledby="demo-titulo">
+            <h2 id="demo-titulo">Simulador de controle PID</h2>
+            <p class="explicacao">
+                Um controlador PID é o "piloto automático" de muitas máquinas: ele compara o valor
+                desejado com o medido e ajusta a ação olhando o erro de agora (P), o erro acumulado
+                (I) e a tendência do erro (D). Aqui, ele abre e fecha uma válvula para manter o
+                nível de um tanque no alvo.
+            </p>
+
+            <div class="presets" role="group" aria-label="Exemplos prontos">
+                <button type="button" data-kp="0.5" data-ki="1" data-kd="0">Subamortecido</button>
+                <button type="button" data-kp="1" data-ki="0.2" data-kd="0">Criticamente amortecido</button>
+                <button type="button" data-kp="0.3" data-ki="0.05" data-kd="0">Lento</button>
+            </div>
+
+            <div class="demo-grade">
+                <form id="controles" class="controles">
+                    <div class="controle">
+                        <label for="kp">Kp <small>proporcional</small></label>
+                        <input type="range" min="0" max="10" step="0.05" value="1" data-param="kp" aria-label="Kp">
+                        <input type="number" id="kp" min="0" max="10" step="0.05" value="1" data-param="kp">
+                    </div>
+                    <div class="controle">
+                        <label for="ki">Ki <small>integral</small></label>
+                        <input type="range" min="0" max="5" step="0.05" value="0.2" data-param="ki" aria-label="Ki">
+                        <input type="number" id="ki" min="0" max="5" step="0.05" value="0.2" data-param="ki">
+                    </div>
+                    <div class="controle">
+                        <label for="kd">Kd <small>derivativo</small></label>
+                        <input type="range" min="0" max="5" step="0.05" value="0" data-param="kd" aria-label="Kd">
+                        <input type="number" id="kd" min="0" max="5" step="0.05" value="0" data-param="kd">
+                    </div>
+                    <div class="controle">
+                        <label for="setpoint">Setpoint <small>nível alvo (%)</small></label>
+                        <input type="range" min="1" max="100" step="1" value="50" data-param="setpoint" aria-label="Setpoint">
+                        <input type="number" id="setpoint" min="1" max="100" step="1" value="50" data-param="setpoint">
+                    </div>
+                    <div class="controle">
+                        <label for="tempo_total">Tempo <small>duração (s)</small></label>
+                        <input type="range" min="5" max="120" step="1" value="60" data-param="tempo_total" aria-label="Tempo">
+                        <input type="number" id="tempo_total" min="5" max="120" step="1" value="60" data-param="tempo_total">
+                    </div>
+                </form>
+
+                <div class="resultados">
+                    <div class="metricas">
+                        <div class="metrica">
+                            <span class="metrica-nome">Overshoot</span>
+                            <strong id="overshoot">—</strong>
+                            <small>quanto passou do alvo</small>
+                        </div>
+                        <div class="metrica">
+                            <span class="metrica-nome">Tempo de subida</span>
+                            <strong id="subida">—</strong>
+                            <small>de 10% a 90% do alvo</small>
+                        </div>
+                        <div class="metrica">
+                            <span class="metrica-nome">Acomodação</span>
+                            <strong id="acomodacao">—</strong>
+                            <small>até ficar a ±2% do alvo</small>
+                        </div>
+                    </div>
+
+                    <div id="grafico-area" class="grafico-area">
+                        <canvas id="grafico" aria-label="Gráfico da resposta do sistema" role="img"></canvas>
+                        <p id="carregando" class="carregando" hidden>Simulando…</p>
+                    </div>
+                    <p id="erro" class="erro" role="alert" hidden></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="/js/demo.js"></script>
 </body>
 </html>
