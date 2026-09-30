@@ -1,7 +1,6 @@
 // Interface do simulador PID: lê os controles, chama /api/simular e desenha o resultado.
 
 const ESPERA_DEBOUNCE_MS = 250;
-const CORES = { setpoint: "#8a94a3", saida: "#1d6fd8", controle: "#e07b24" };
 
 const formulario = document.getElementById("controles");
 const areaGrafico = document.getElementById("grafico-area");
@@ -10,6 +9,7 @@ const caixaErro = document.getElementById("erro");
 const botoesPreset = document.querySelectorAll(".presets button");
 
 let grafico = null;
+let ultimoDesenho = null; // guardado para redesenhar quando o tema muda
 let temporizador = null;
 let requisicaoAtual = null;
 
@@ -122,7 +122,21 @@ function mostrarMetricas(metricas) {
     document.getElementById("acomodacao").textContent = metricas ? formatar(metricas.tempo_acomodacao, "s") : "—";
 }
 
+// As cores do gráfico vêm das variáveis CSS, para seguir o tema atual.
+function coresDoTema() {
+    const estilo = getComputedStyle(document.documentElement);
+    const cor = (variavel) => estilo.getPropertyValue(variavel).trim();
+    return {
+        setpoint: cor("--grafico-setpoint"),
+        saida: cor("--destaque"),
+        controle: cor("--grafico-controle"),
+        texto: cor("--texto-suave"),
+        grade: cor("--borda"),
+    };
+}
+
 function desenharGrafico(dados, setpoint, tempoTotal) {
+    ultimoDesenho = [dados, setpoint, tempoTotal];
     const pontos = (serie) => dados.tempo.map((t, i) => ({ x: t, y: serie[i] }));
     const series = [
         [{ x: 0, y: setpoint }, { x: tempoTotal, y: setpoint }],
@@ -136,13 +150,18 @@ function desenharGrafico(dados, setpoint, tempoTotal) {
         return;
     }
 
+    const cores = coresDoTema();
+    Chart.defaults.color = cores.texto;
+    Chart.defaults.borderColor = cores.grade;
+    Chart.defaults.font.family = "Inter, system-ui, sans-serif";
+
     grafico = new Chart(document.getElementById("grafico"), {
         type: "line",
         data: {
             datasets: [
-                { label: "Setpoint", data: series[0], borderColor: CORES.setpoint, borderDash: [6, 4], yAxisID: "nivel" },
-                { label: "Nível do tanque (%)", data: series[1], borderColor: CORES.saida, yAxisID: "nivel" },
-                { label: "Abertura da válvula (%)", data: series[2], borderColor: CORES.controle, yAxisID: "valvula" },
+                { label: "Setpoint", data: series[0], borderColor: cores.setpoint, borderDash: [6, 4], yAxisID: "nivel" },
+                { label: "Nível do tanque (%)", data: series[1], borderColor: cores.saida, yAxisID: "nivel" },
+                { label: "Abertura da válvula (%)", data: series[2], borderColor: cores.controle, yAxisID: "valvula" },
             ],
         },
         options: {
@@ -164,6 +183,14 @@ function desenharGrafico(dados, setpoint, tempoTotal) {
         },
     });
 }
+
+// Ao trocar o tema, recria o gráfico com as novas cores (sem nova simulação).
+document.addEventListener("temamudou", () => {
+    if (!grafico) return;
+    grafico.destroy();
+    grafico = null;
+    desenharGrafico(...ultimoDesenho);
+});
 
 // --- Início ------------------------------------------------------------------
 

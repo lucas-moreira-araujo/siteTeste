@@ -13,8 +13,14 @@ requirements.txt    # Dependências de produção (vão para a Vercel)
 requirements-dev.txt # Dependências de desenvolvimento (pytest)
 .python-version     # Versão do Python usada na Vercel
 templates/          # HTML renderizado pelo Flask
-public/             # Arquivos estáticos (CSS, JS, imagens), servidos na raiz do site
+public/             # Arquivos estáticos, servidos na raiz do site
+  css/style.css     # Estilos; cores dos temas escuro/claro em variáveis CSS
+  js/tema.js        # Alternância de tema (lembrada no navegador)
+  js/demo.js        # Interface do simulador: controles, chamada à API e gráfico
 ```
+
+A página tem as seções Início, Sobre mim, Tecnologias, Projetos, Demo (simulador
+PID) e Contato.
 
 ## Rodando localmente
 

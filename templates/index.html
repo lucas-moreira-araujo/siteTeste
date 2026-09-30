@@ -1,25 +1,178 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-tema="escuro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lucas Moreira Araujo</title>
+    <title>Lucas Moreira Araujo · Portfólio</title>
+    <meta name="description" content="Portfólio de Lucas Moreira Araujo, estudante de Engenharia de Controle e Automação, com um simulador de controle PID interativo.">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+    <!-- Aplica o tema salvo antes de a página aparecer, para não "piscar" o tema errado. -->
+    <script>
+        try {
+            if (localStorage.getItem("tema") === "claro") document.documentElement.dataset.tema = "claro";
+        } catch (e) {}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <header class="cabecalho">
-        <h1>Lucas Moreira Araujo</h1>
-        <p>Engenharia de Controle e Automação · dados e IA aplicados a processos</p>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="topo">
+        <nav class="container topo-nav" aria-label="Principal">
+            <a class="marca" href="#inicio">Lucas Araujo</a>
+            <ul class="menu">
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#tecnologias">Tecnologias</a></li>
+                <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <button type="button" id="botao-tema" class="botao-tema" aria-label="Mudar para tema claro">
+                <svg class="icone-sol" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4.5"/>
+                    <path d="M12 1.5v2.5M12 20v2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M1.5 12H4M20 12h2.5M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/>
+                </svg>
+                <svg class="icone-lua" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+                </svg>
+            </button>
+        </nav>
     </header>
 
-    <main>
-        <section class="demo" aria-labelledby="demo-titulo">
-            <h2 id="demo-titulo">Simulador de controle PID</h2>
-            <p class="explicacao">
+    <main id="conteudo">
+        <!-- Hero -->
+        <section id="inicio" class="hero container">
+            <p class="sobretitulo">Engenharia de Controle e Automação</p>
+            <h1>Lucas Moreira Araujo</h1>
+            <p class="hero-frase">
+                Unindo controle e automação, dados e inteligência artificial para entender e
+                melhorar processos.
+            </p>
+            <div class="hero-acoes">
+                <a class="botao botao-primario" href="#demo">Testar o simulador PID</a>
+                <a class="botao botao-secundario" href="#contato">Entrar em contato</a>
+            </div>
+        </section>
+
+        <!-- Sobre -->
+        <section id="sobre" class="secao container" aria-labelledby="sobre-titulo">
+            <h2 id="sobre-titulo">Sobre mim</h2>
+            <div class="texto">
+                <p>
+                    Sou estudante do 8º semestre de Engenharia de Controle e Automação na Faculdade
+                    Engenheiro Salvador Arena (Faculdade de Tecnologia Termomecânica), em São
+                    Bernardo do Campo.
+                </p>
+                <p>
+                    Meu interesse está no encontro entre automação, dados e inteligência artificial:
+                    usar software para entender e melhorar processos. Fiz o curso de Programação em
+                    Inteligência Artificial Generativa no SENAI e programo em Python, SQL, C, C++,
+                    Java e C#.
+                </p>
+            </div>
+        </section>
+
+        <!-- Tecnologias -->
+        <section id="tecnologias" class="secao container" aria-labelledby="tecnologias-titulo">
+            <h2 id="tecnologias-titulo">Tecnologias</h2>
+            <div class="grupos">
+                <div class="cartao">
+                    <h3>Linguagens</h3>
+                    <ul class="etiquetas">
+                        <li>Python</li>
+                        <li>SQL</li>
+                        <li>C</li>
+                        <li>C++</li>
+                        <li>Java</li>
+                        <li>C#</li>
+                    </ul>
+                </div>
+                <div class="cartao">
+                    <h3>Microcontroladores</h3>
+                    <ul class="etiquetas">
+                        <li>Arduino</li>
+                        <li>ESP32</li>
+                    </ul>
+                </div>
+                <div class="cartao">
+                    <h3>Usadas neste site</h3>
+                    <ul class="etiquetas">
+                        <li>Flask</li>
+                        <li>HTML</li>
+                        <li>CSS</li>
+                        <li>JavaScript</li>
+                        <li>Chart.js</li>
+                        <li>pytest</li>
+                        <li>Git</li>
+                        <li>Vercel</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projetos -->
+        <section id="projetos" class="secao container" aria-labelledby="projetos-titulo">
+            <h2 id="projetos-titulo">Projetos</h2>
+            <div class="projetos">
+                <article class="cartao projeto">
+                    <p class="projeto-contexto">SENAI · Programação em IA Generativa</p>
+                    <h3>Chatbot integrado a API REST</h3>
+                    <p>
+                        Chatbot desenvolvido em Python e integrado a uma API REST, criado durante o
+                        curso de Programação em Inteligência Artificial Generativa.
+                    </p>
+                    <ul class="etiquetas">
+                        <li>Python</li>
+                        <li>API REST</li>
+                        <li>IA Generativa</li>
+                    </ul>
+                </article>
+
+                <article class="cartao projeto">
+                    <p class="projeto-contexto">Competição da faculdade</p>
+                    <h3>Guerra de Robôs</h3>
+                    <p>
+                        Corrida de robôs seguidores de linha. Fiquei responsável pela programação dos
+                        microcontroladores: um Arduino e um ESP32 trabalhando em arquitetura
+                        mestre-escravo.
+                    </p>
+                    <ul class="etiquetas">
+                        <li>C++</li>
+                        <li>Arduino</li>
+                        <li>ESP32</li>
+                    </ul>
+                </article>
+
+                <article class="cartao projeto">
+                    <p class="projeto-contexto">Disciplina de Instrumentação e Sensores</p>
+                    <h3>Controle de Luminosidade</h3>
+                    <p>
+                        Sistema de eficiência energética: um sensor mede a luz natural (simulada com
+                        uma lanterna) e LEDs, no papel das lâmpadas, só acendem quando essa luz não é
+                        suficiente para iluminar o ambiente.
+                    </p>
+                    <ul class="etiquetas">
+                        <li>Sensores</li>
+                        <li>Automação</li>
+                        <li>Eficiência energética</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- Demo -->
+        <section id="demo" class="secao container" aria-labelledby="demo-titulo">
+            <h2 id="demo-titulo">Demo: simulador de controle PID</h2>
+            <p class="texto">
                 Um controlador PID é o "piloto automático" de muitas máquinas: ele compara o valor
                 desejado com o medido e ajusta a ação olhando o erro de agora (P), o erro acumulado
                 (I) e a tendência do erro (D). Aqui, ele abre e fecha uma válvula para manter o
-                nível de um tanque no alvo.
+                nível de um tanque no alvo. A simulação roda em Python, no servidor.
             </p>
 
             <div class="presets" role="group" aria-label="Exemplos prontos">
@@ -29,7 +182,7 @@
             </div>
 
             <div class="demo-grade">
-                <form id="controles" class="controles">
+                <form id="controles" class="cartao controles">
                     <div class="controle">
                         <label for="kp">Kp <small>proporcional</small></label>
                         <input type="range" min="0" max="10" step="0.05" value="1" data-param="kp" aria-label="Kp">
@@ -59,34 +212,69 @@
 
                 <div class="resultados">
                     <div class="metricas">
-                        <div class="metrica">
+                        <div class="cartao metrica">
                             <span class="metrica-nome">Overshoot</span>
                             <strong id="overshoot">—</strong>
                             <small>quanto passou do alvo</small>
                         </div>
-                        <div class="metrica">
+                        <div class="cartao metrica">
                             <span class="metrica-nome">Tempo de subida</span>
                             <strong id="subida">—</strong>
                             <small>de 10% a 90% do alvo</small>
                         </div>
-                        <div class="metrica">
+                        <div class="cartao metrica">
                             <span class="metrica-nome">Acomodação</span>
                             <strong id="acomodacao">—</strong>
                             <small>até ficar a ±2% do alvo</small>
                         </div>
                     </div>
 
-                    <div id="grafico-area" class="grafico-area">
-                        <canvas id="grafico" aria-label="Gráfico da resposta do sistema" role="img"></canvas>
+                    <div id="grafico-area" class="cartao grafico-area">
+                        <canvas id="grafico" role="img" aria-label="Gráfico do nível do tanque e da abertura da válvula ao longo do tempo"></canvas>
                         <p id="carregando" class="carregando" hidden>Simulando…</p>
                     </div>
                     <p id="erro" class="erro" role="alert" hidden></p>
                 </div>
             </div>
+
+            <p class="demo-codigo">
+                <a href="https://github.com/lucas-moreira-araujo/siteTeste">Ver o código deste site no GitHub</a>
+            </p>
+        </section>
+
+        <!-- Contato -->
+        <section id="contato" class="secao container" aria-labelledby="contato-titulo">
+            <h2 id="contato-titulo">Contato</h2>
+            <p class="texto">Vamos conversar? Estes são os melhores caminhos para falar comigo.</p>
+            <ul class="contatos">
+                <li>
+                    <a class="cartao contato" href="mailto:araujolucas0602@gmail.com">
+                        <span class="contato-tipo">E-mail</span>
+                        <span class="contato-valor">araujolucas0602@gmail.com</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="cartao contato" href="https://www.linkedin.com/in/lucas-moreira-ara%C3%BAjo" target="_blank" rel="noopener">
+                        <span class="contato-tipo">LinkedIn</span>
+                        <span class="contato-valor">in/lucas-moreira-araújo</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="cartao contato" href="https://github.com/lucas-moreira-araujo" target="_blank" rel="noopener">
+                        <span class="contato-tipo">GitHub</span>
+                        <span class="contato-valor">lucas-moreira-araujo</span>
+                    </a>
+                </li>
+            </ul>
         </section>
     </main>
 
+    <footer class="rodape container">
+        <p>© 2026 Lucas Moreira Araujo · Feito com Flask e JavaScript puro</p>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="/js/tema.js"></script>
     <script src="/js/demo.js"></script>
 </body>
 </html>
