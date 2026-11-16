@@ -9,7 +9,11 @@ app = Flask(__name__, static_folder=None)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    # Endereço público do site, usado nas marcações de prévia do link (Open Graph),
+    # que exigem URL completa. Na Vercel o protocolo real vem no cabeçalho do proxy.
+    protocolo = request.headers.get("X-Forwarded-Proto", request.scheme)
+    url_base = f"{protocolo}://{request.host}"
+    return render_template("index.html", url_base=url_base)
 
 
 @app.route("/api/health")

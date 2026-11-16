@@ -262,6 +262,36 @@ a {
     gap: 0.75rem;
 }
 
+.redes {
+    display: flex;
+    gap: 0.5rem;
+    margin: 1.75rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.redes a {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    color: var(--texto-suave);
+    border: 1px solid var(--borda);
+    border-radius: 50%;
+    transition: color var(--transicao), border-color var(--transicao);
+}
+
+.redes a:hover {
+    color: var(--destaque);
+    border-color: var(--destaque);
+}
+
+.redes svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
 .botao {
     display: inline-block;
     padding: 0.75rem 1.25rem;
@@ -595,6 +625,13 @@ a {
     list-style: none;
 }
 
+/* Quatro contatos: 2 colunas, para as linhas ficarem completas. */
+@media (min-width: 560px) {
+    .contatos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 .contato {
     display: flex;
     flex-direction: column;
@@ -626,4 +663,43 @@ a {
 
 .rodape p {
     margin: 0;
+}
+
+/* ==========================================================================
+   Animações (ver js/animacoes.js). Só valem quando o JavaScript ativa a
+   classe "com-animacao"; com "reduzir movimento", nada se move.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+    /* Abertura: os elementos entram em sequência ao carregar a página. */
+    .hero > * {
+        animation: entrar 0.6s ease both;
+    }
+
+    .hero > :nth-child(2) { animation-delay: 0.08s; }
+    .hero > :nth-child(3) { animation-delay: 0.16s; }
+    .hero > :nth-child(4) { animation-delay: 0.24s; }
+    .hero > :nth-child(5) { animation-delay: 0.32s; }
+
+    /* Passos e projetos: surgem quando entram na tela. */
+    .com-animacao .passos .projeto,
+    .com-animacao .pares .projeto {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.5s ease var(--atraso, 0ms), transform 0.5s ease var(--atraso, 0ms),
+            border-color var(--transicao);
+    }
+
+    .com-animacao .passos .projeto.visivel,
+    .com-animacao .pares .projeto.visivel {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes entrar {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
 }
