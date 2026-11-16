@@ -168,12 +168,65 @@ a {
     color: var(--texto);
 }
 
+.botao-cv {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-left: auto;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--texto);
+    text-decoration: none;
+    white-space: nowrap;
+    border: 1px solid var(--borda);
+    border-radius: 999px;
+    transition: border-color var(--transicao), color var(--transicao);
+}
+
+.botao-cv:hover {
+    color: var(--destaque);
+    border-color: var(--destaque);
+}
+
+.botao-cv svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Entre o celular e o computador o menu ocupa a linha toda:
+   o currículo fica só no botão da abertura. */
+@media (min-width: 640px) and (max-width: 899px) {
+    .botao-cv {
+        display: none;
+    }
+
+    .botao-cv + .botao-tema {
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 639px) {
+    .botao-cv {
+        padding: 0.4rem 0.7rem;
+        font-size: 0.8rem;
+    }
+
+    .topo-nav {
+        column-gap: 0.6rem;
+    }
+}
+
 .botao-tema {
     display: grid;
     place-items: center;
     width: 40px;
     height: 40px;
-    margin-left: auto;
     color: var(--texto);
     background: transparent;
     border: 1px solid var(--borda);
