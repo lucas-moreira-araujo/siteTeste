@@ -19,8 +19,8 @@ assistido por IA.
 
 ## O que tem no site
 
-- **Sobre mim, Experiência, Tecnologias e Projetos:** apresentação, estágio
-  atual, tecnologias e projetos (app de finanças pessoais ContAí, controle de
+- **Sobre mim, Como eu trabalho, Tecnologias e Projetos:** apresentação, meu
+  processo de desenvolvimento com IA, tecnologias e projetos (app de finanças pessoais ContAí, controle de
   luminosidade, robô seguidor de linha e chatbot com API REST).
 - **Demo PID:** o simulador, descrito abaixo.
 - **Contato:** e-mail, LinkedIn e GitHub.
