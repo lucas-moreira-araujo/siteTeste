@@ -345,6 +345,14 @@ a {
     gap: 1rem;
 }
 
+.cartao h3 small {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--texto-suave);
+}
+
 .projeto {
     display: flex;
     flex-direction: column;

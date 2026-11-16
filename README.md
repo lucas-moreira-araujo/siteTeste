@@ -7,17 +7,21 @@ o visitante ajusta os ganhos do controlador e vê, em tempo real, como o nível 
 um tanque responde. A simulação roda em Python no servidor e o resultado é
 desenhado no navegador.
 
-Sou estudante do 8º semestre de Engenharia de Controle e Automação, com
-interesse em dados e IA aplicados a processos. O projeto junta a teoria de
-controle da minha formação com desenvolvimento de software.
+Sou estudante de Engenharia de Controle e Automação (conclusão prevista para
+dezembro de 2027) e estagiário de Desenvolvimento de Sistemas na Revvotec
+(Grupo 360). O projeto junta a teoria de controle da minha formação com
+desenvolvimento de software, e foi o teste do processo seletivo do estágio.
+
+**Como foi desenvolvido:** com o Claude Code, ferramenta de desenvolvimento
+assistido por IA.
 
 ---
 
 ## O que tem no site
 
-- **Sobre mim, Tecnologias e Projetos:** apresentação, linguagens e projetos
-  acadêmicos (chatbot com API REST, robô seguidor de linha, controle de
-  luminosidade).
+- **Sobre mim, Experiência, Tecnologias e Projetos:** apresentação, estágio
+  atual, tecnologias e projetos (app de finanças pessoais ContAí, controle de
+  luminosidade, robô seguidor de linha e chatbot com API REST).
 - **Demo PID:** o simulador, descrito abaixo.
 - **Contato:** e-mail, LinkedIn e GitHub.
 - Tema escuro e claro, layout responsivo (testado em 375px de largura) e
