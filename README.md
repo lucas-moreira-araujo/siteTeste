@@ -1,6 +1,6 @@
 # Portfólio — Lucas Moreira Araujo
 
-**Site no ar: https://site-teste-ruby.vercel.app**
+**Site no ar: https://port-lucasm-araujo.vercel.app**
 
 Portfólio pessoal com uma demo interativa: um **simulador de controle PID** em que
 o visitante ajusta os ganhos do controlador e vê, em tempo real, como o nível de
