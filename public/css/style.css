@@ -211,7 +211,21 @@ a {
     .menu {
         order: 3;
         width: 100%;
-        gap: 0.25rem 1rem;
+        gap: 0.25rem 0.6rem;
+        justify-content: space-between;
+        /* Uma linha só: se não couber, o menu rola para o lado. */
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        white-space: nowrap;
+        scrollbar-width: none;
+    }
+
+    .menu::-webkit-scrollbar {
+        display: none;
+    }
+
+    .menu a {
+        font-size: 0.78rem;
     }
 }
 
@@ -353,6 +367,30 @@ a {
     color: var(--texto-suave);
 }
 
+/* Quatro passos: 4 colunas em telas largas, 2 em médias, 1 no celular. */
+@media (min-width: 560px) {
+    .passos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .passos {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.passos .projeto > p:not(.projeto-contexto) {
+    margin-bottom: 0;
+}
+
+/* Quatro projetos: 2 colunas, para não sobrar um cartão sozinho na última linha. */
+@media (min-width: 700px) {
+    .pares {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 .projeto {
     display: flex;
     flex-direction: column;
@@ -469,6 +507,12 @@ a {
     border-radius: 8px;
 }
 
+/* Sem isto, o gráfico impede as colunas de encolherem em telas muito estreitas. */
+.demo-grade > *,
+.resultados > * {
+    min-width: 0;
+}
+
 .metricas {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -512,6 +556,7 @@ a {
 }
 
 .grafico-area canvas {
+    max-width: 100%;
     transition: opacity var(--transicao);
 }
 
