@@ -479,6 +479,79 @@ a {
     flex-direction: column;
 }
 
+/* Projeto em destaque: ocupa a linha toda, com as telas do app abaixo do texto. */
+.projeto-destaque {
+    grid-column: 1 / -1;
+    gap: 1.5rem;
+}
+
+.projeto-texto {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.projeto-texto > p:not(.projeto-contexto) {
+    margin: 0 0 1.25rem;
+    color: var(--texto-suave);
+}
+
+.telas {
+    display: flex;
+    gap: 0.75rem;
+    min-width: 0;
+    margin: 0;
+    padding: 0 0 0.25rem;
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+}
+
+.telas li {
+    flex: 0 0 auto;
+    width: 168px;
+    scroll-snap-align: start;
+}
+
+.telas figure {
+    margin: 0;
+}
+
+.telas img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--borda);
+    border-radius: 18px;
+}
+
+.telas figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.78rem;
+    text-align: center;
+    color: var(--texto-suave);
+}
+
+@media (min-width: 900px) {
+    /* Quatro telas lado a lado, abaixo do texto, sem rolagem. */
+    .telas {
+        justify-content: space-between;
+        gap: 1rem;
+        overflow: visible;
+    }
+
+    .telas li {
+        flex: 1 1 0;
+        width: auto;
+        max-width: 210px;
+    }
+
+    /* Com o destaque em cima, os outros três projetos cabem em uma linha. */
+    .pares {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 .projeto:hover {
     border-color: var(--destaque);
 }
@@ -754,5 +827,12 @@ a {
     from {
         opacity: 0;
         transform: translateY(12px);
+    }
+}
+
+/* Em tablets, com dois projetos por linha, o último ocupa a linha toda para não sobrar espaço vazio. */
+@media (min-width: 700px) and (max-width: 899px) {
+    .pares .projeto:last-child {
+        grid-column: 1 / -1;
     }
 }
