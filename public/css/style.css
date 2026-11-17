@@ -479,7 +479,7 @@ a {
     flex-direction: column;
 }
 
-/* Projeto em destaque: ocupa a linha toda, com as telas do app ao lado do texto. */
+/* Projeto em destaque: ocupa a linha toda, com as telas do app abaixo do texto. */
 .projeto-destaque {
     grid-column: 1 / -1;
     gap: 1.5rem;
@@ -533,18 +533,17 @@ a {
 }
 
 @media (min-width: 900px) {
-    .projeto-destaque {
-        flex-direction: row;
-        align-items: center;
-        gap: 2rem;
-    }
-
-    .projeto-texto {
-        flex: 1;
-    }
-
+    /* Quatro telas lado a lado, abaixo do texto, sem rolagem. */
     .telas {
+        justify-content: space-between;
+        gap: 1rem;
         overflow: visible;
+    }
+
+    .telas li {
+        flex: 1 1 0;
+        width: auto;
+        max-width: 210px;
     }
 
     /* Com o destaque em cima, os outros três projetos cabem em uma linha. */
